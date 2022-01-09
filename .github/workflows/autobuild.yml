@@ -1,9 +1,15 @@
-name: Release
+name: Autobuild Proxy
 
 on:
-  push:
-    tags:
-        - 'v*.*.*'
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
+#  schedule:
+#    - cron: 0 8 * * 5
 
 jobs:
 
