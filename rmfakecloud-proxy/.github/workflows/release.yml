@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+        - 'v*.*.*'
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.15
+        id: go
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+
+      - name: Clone source code
+        run: |
+          git clone https://github.com/ddvk/rmfakecloud-proxy.git cloudproxy
+          
+      - name: Build 
+        run: |
+          cp -rf Makefile cloudproxy/Makefile
+          cd cloudproxy
+          make all
+          
+      - name: Upload firmware directory
+        uses: actions/upload-artifact@main
+        with:
+          name: framebuffer
+          path: /home/runner/work/rmfakecloud/rmfakecloud/fakecloud/dist/*
