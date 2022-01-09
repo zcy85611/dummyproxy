@@ -1,6 +1,7 @@
 BINARY=dist/rmfake-proxy
 WINBINARY=dist/rmfake-proxy.exe
 LINUXBINARY=dist/rmfake-proxy64
+MACBINARY=dist/rmfake-proxy-darwin
 INSTALLER=dist/installer.sh
 .PHONY: clean
 all: $(INSTALLER) $(WINBINARY) $(LINUXBINARY) $(MACBINARY)
